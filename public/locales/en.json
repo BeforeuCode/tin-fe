@@ -1,0 +1,69 @@
+{
+  "auth": {
+    "sidePanel": {
+      "title": "Platform where you find your game mates!",
+      "subtitle": "Dont wait! Join now!"
+    },
+    "login": {
+      "title": "Log In",
+      "dontHaveAccount": "Don't have an account yet?",
+      "signUp": "Sing Up",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "button": "Log In"
+    },
+    "register": {
+      "singUpTitle": "Sing Up",
+      "singUpSubtitle": "Join our community and find new friends to play with",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "namePlaceholder": "Name",
+      "nickNamePlaceholder": "Nickname",
+      "agePlaceholder": "Age",
+      "singUp": "Sing Up",
+      "confirmTitle": "You've been registered!",
+      "confirm": "You can now log in and use the application",
+      "confirmGo": "Go to the log in page",
+      "errors": {
+        "passwordTooShort": "Password Too Short!"
+      }
+    }
+  },
+  "errors": {
+    "reqField": "This field is required"
+  },
+  "navBar": {
+    "games": "All Games",
+    "myGames": "My Games",
+    "myInvitations": "My Invitations"
+  },
+  "myGames": {
+    "label": "My Games",
+    "button": "ADD NEW GAME",
+    "addNewGame": "Add new game"
+  },
+  "addGame": {
+    "title": "Title",
+    "titlePlaceholder": "Fill in title...",
+    "date": "Date",
+    "datePlaceholder": "Fill in date...",
+    "maxPlayers": "Max Players",
+    "maxPlayersPlaceholder": "Fill in max players number...",
+    "contact": "Contact",
+    "contactPlaceholder": "Fill in contact information...",
+    "description": "Description",
+    "descriptionPlaceholder": "Fill in description...",
+    "game": "Game",
+    "gamePlaceholder": "Select your game...",
+    "submit": "Submit"
+  },
+  "game": {
+    "date": "Date",
+    "players": "Players",
+    "contact": "Contact",
+    "description": "Description",
+    "edit": "Edit",
+    "remove": "Remove",
+    "askForInvite": "Ask For Invite"
+  }
+}
