@@ -8,6 +8,8 @@ import { AddNewGame } from './_Routes/MyGames/AddNewGame/AddNewGame';
 import { MyInvitations } from './_Routes/MyInvitations/MyInvitations';
 import { EditGame } from './_Routes/MyGames/EditGame/EditGame';
 import { AllGames } from './_Routes/AllGames/AllGames';
+import { Details } from './_Routes/MyGames/Details/Details';
+import { Profile } from './_Routes/Profile/Profile';
 
 export const Home: FC = () => {
   const [navBarExpanded, setNavBarExpanded] = useState<boolean>(true);
@@ -40,6 +42,12 @@ export const Home: FC = () => {
         </Route>
         <Route exact path="/home/my-games/edit/:id">
           <EditGame />
+        </Route>
+        <Route exact path="/home/my-games/details/:id">
+          <Details />
+        </Route>
+        <Route exact path="/home/profile">
+          <Profile />
         </Route>
       </NavigationContext.Provider>
     </HomeBody>

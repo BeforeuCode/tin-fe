@@ -49,7 +49,6 @@ export const AllGames: FC = () => {
           }}
           date="25.10.2020 19:00"
           maxPlayers={5}
-          contact="http://discord.gg/HRcbkV"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
         >
           <TinButton
@@ -69,7 +68,6 @@ export const AllGames: FC = () => {
           }}
           date="25.10.2020 19:00"
           maxPlayers={5}
-          contact="http://discord.gg/HRcbkV"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
         >
           <TinButton
@@ -89,7 +87,6 @@ export const AllGames: FC = () => {
           }}
           date="25.10.2020 19:00"
           maxPlayers={5}
-          contact="http://discord.gg/HRcbkV"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
         >
           <TinButton

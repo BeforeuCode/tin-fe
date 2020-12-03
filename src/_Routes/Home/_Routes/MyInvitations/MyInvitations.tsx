@@ -50,6 +50,7 @@ export const MyInvitations: FC = () => {
           date="25.10.2020 19:00"
           maxPlayers={5}
           contact="http://discord.gg/HRcbkV"
+          invitationStatus={'ACCEPTED'}
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
         >
           <TinButton
@@ -71,6 +72,7 @@ export const MyInvitations: FC = () => {
           date="25.10.2020 19:00"
           maxPlayers={5}
           contact="http://discord.gg/HRcbkV"
+          invitationStatus={'REJECTED'}
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
         >
           <TinButton
@@ -84,6 +86,7 @@ export const MyInvitations: FC = () => {
           id={0}
           title="Looking for team for clash - Main Adc - Diamond III"
           gameName="League of Legends"
+          invitationStatus={'ACCEPTED'}
           gameLogo={{
             src:
               'https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends-285x380.jpg',

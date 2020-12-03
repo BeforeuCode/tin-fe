@@ -16,5 +16,6 @@ module.exports = {
     'react/prop-types': 0,
     quotes: 0,
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+    '@typescript-eslint/ban-types': 1,
   },
 };

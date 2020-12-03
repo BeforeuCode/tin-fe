@@ -29,6 +29,13 @@ const StyledMenuIconButton = styled(MenuIconButton)`
   }
 `;
 
+const BottomMenuIconButton = styled(MenuIconButton)`
+  && {
+    margin-top: auto;
+    margin-bottom: 5rem;
+  }
+`;
+
 export const NavigationPanel: FC = () => {
   const classes = navigationPanelStyles();
   const { navBarExpanded, onExpandClick } = useContext(NavigationContext);
@@ -75,6 +82,14 @@ export const NavigationPanel: FC = () => {
         >
           <MyInvitationsIcon isFocused={isActive('/home/my-invitations')} />
         </StyledMenuIconButton>
+        <BottomMenuIconButton
+          isFocused={isActive('/home/profile')}
+          isExtended={navBarExpanded}
+          label={t('navBar.profile')}
+          linkPath={'/home/profile'}
+        >
+          <MyInvitationsIcon isFocused={isActive('/home/profile')} />
+        </BottomMenuIconButton>
       </Drawer>
       <PanelSwitcher isExtended={navBarExpanded} onClick={handleDrawerOpen} />
     </Wrapper>

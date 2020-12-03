@@ -61,16 +61,12 @@ export const MyGames: FC = () => {
           maxPlayers={5}
           contact="http://discord.gg/HRcbkV"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
+          creationDate="21.10.2020"
         >
-          <StyledButton
-            label={t('game.remove')}
-            onClick={() => console.log('remove')}
-            size={'small'}
-          />
           <TinButton
-            label={t('game.edit')}
+            label={t('game.details')}
             variant={'white'}
-            onClick={() => history.push('my-games/edit/2')}
+            onClick={() => history.push('my-games/details/2')}
             size={'small'}
           />
         </Invitation>
@@ -87,16 +83,12 @@ export const MyGames: FC = () => {
           maxPlayers={5}
           contact="http://discord.gg/HRcbkV"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
+          creationDate="21.10.2020"
         >
-          <StyledButton
-            label={t('game.remove')}
-            onClick={() => console.log('remove')}
-            size={'small'}
-          />
           <TinButton
-            label={t('game.edit')}
+            label={t('game.details')}
             variant={'white'}
-            onClick={() => history.push('my-games/edit/2')}
+            onClick={() => history.push('my-games/details/2')}
             size={'small'}
           />
         </Invitation>
@@ -113,16 +105,12 @@ export const MyGames: FC = () => {
           maxPlayers={5}
           contact="http://discord.gg/HRcbkV"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
+          creationDate="21.10.2020"
         >
-          <StyledButton
-            label={t('game.remove')}
-            onClick={() => console.log('remove')}
-            size={'small'}
-          />
           <TinButton
-            label={t('game.edit')}
+            label={t('game.details')}
             variant={'white'}
-            onClick={() => history.push('my-games/edit/2')}
+            onClick={() => history.push('my-games/details/2')}
             size={'small'}
           />
         </Invitation>

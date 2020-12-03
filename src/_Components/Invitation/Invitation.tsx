@@ -21,8 +21,10 @@ type InvitationProps = {
   gameName: string;
   date: string;
   maxPlayers: number;
-  contact: string;
+  contact?: string;
   description: string;
+  creationDate?: string;
+  invitationStatus?: string;
   gameLogo: {
     src: string;
     alt: string;
@@ -38,6 +40,8 @@ export const Invitation: FC<InvitationProps> = ({
   contact,
   description,
   gameLogo,
+  creationDate,
+  invitationStatus,
   children,
 }) => {
   const { t } = useTranslation();
@@ -59,14 +63,36 @@ export const Invitation: FC<InvitationProps> = ({
               <StyledInfoTitle>{t('game.players')}:</StyledInfoTitle>
               <StyledInfoDescription>2/{maxPlayers}</StyledInfoDescription>
             </StyledInfoRow>
-            <StyledInfoRow>
-              <StyledInfoTitle>{t('game.contact')}:</StyledInfoTitle>
-              <StyledInfoDescription>{contact}</StyledInfoDescription>
-            </StyledInfoRow>
+            {contact && (
+              <StyledInfoRow>
+                <StyledInfoTitle>{t('game.contact')}:</StyledInfoTitle>
+                {!invitationStatus ? (
+                  <StyledInfoDescription>{contact}</StyledInfoDescription>
+                ) : invitationStatus === 'ACCEPTED' ? (
+                  <StyledInfoDescription>{contact}</StyledInfoDescription>
+                ) : (
+                  <StyledInfoDescription>*******</StyledInfoDescription>
+                )}
+              </StyledInfoRow>
+            )}
             <StyledInfoRow>
               <StyledInfoTitle>{t('game.description')}:</StyledInfoTitle>
               <StyledInfoDescription>{description}</StyledInfoDescription>
             </StyledInfoRow>
+            {creationDate && (
+              <StyledInfoRow>
+                <StyledInfoTitle>{t('game.creationDate')}:</StyledInfoTitle>
+                <StyledInfoDescription>{creationDate}</StyledInfoDescription>
+              </StyledInfoRow>
+            )}
+            {invitationStatus && (
+              <StyledInfoRow>
+                <StyledInfoTitle>{t('game.invitationStatus')}:</StyledInfoTitle>
+                <StyledInfoDescription>
+                  {invitationStatus}
+                </StyledInfoDescription>
+              </StyledInfoRow>
+            )}
           </StyledInfoBox>
         </StyledTextColumn>
       </StyledGameInfo>
