@@ -10,6 +10,7 @@ import { TinInput } from '../../../../_Components/TinInput';
 import { FieldErrorMessage } from '../../../../_Components/Forms/FormErrorMessage';
 import styled from '@emotion/styled';
 import { TinButton } from '../../../../_Components/TinButton';
+import { ICommonProps } from '../../../../_Types/props';
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -21,8 +22,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
   padding: 5rem;
+  width: 100%;
 `;
 
 const INITIAL_VALUES = {
@@ -37,23 +38,26 @@ const REQUIRED_FIELDS = ['email', 'password', 'name', 'nickName', 'age'];
 
 const requiredFormValidation = prepareRequiredFormValidation(REQUIRED_FIELDS);
 
-interface IProps {
+interface IProps extends ICommonProps {
   onSubmit: (form: any) => void;
   id?: string;
 }
 
-export const ProfileForm: FC<IProps> = ({ onSubmit, id }) => {
+export const ProfileForm: FC<IProps> = ({ onSubmit, id, className }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState<any>();
+  const [profile, setProfile] = useState<any>({
+    id: 2,
+    name: 'Jane',
+    email: 'JaneDoe21@gmail.com',
+    nickname: 'JD21',
+    age: 21,
+  });
 
   useEffect(() => {
-    if (id) {
-      console.log(`fetch data ${id}`);
-    }
     // eslint-disable-next-line
-  }, [id]);
+  });
 
   const requiredFieldsValidation = prepareRequiredFieldsValidation(
     REQUIRED_FIELDS,
@@ -89,14 +93,14 @@ export const ProfileForm: FC<IProps> = ({ onSubmit, id }) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <TinInput
         name="email"
         label={t('auth.register.email')}
         placeholder={t('auth.register.emailPlaceholder')}
         onChange={formik.handleChange}
         className="plx-input"
-        defaultValue={INITIAL_VALUES.email}
+        value={profile.email}
       />
       {formik.errors.email && (
         <FieldErrorMessage message={formik.errors.email} />
@@ -109,7 +113,7 @@ export const ProfileForm: FC<IProps> = ({ onSubmit, id }) => {
         placeholder={t('auth.register.passwordPlaceholder')}
         onChange={formik.handleChange}
         className="plx-input"
-        defaultValue={INITIAL_VALUES.password}
+        value={profile.password}
       />
       {formik.errors.password && (
         <FieldErrorMessage message={formik.errors.password} />
@@ -121,7 +125,7 @@ export const ProfileForm: FC<IProps> = ({ onSubmit, id }) => {
         placeholder={t('auth.register.namePlaceholder')}
         onChange={formik.handleChange}
         className="plx-input"
-        defaultValue={INITIAL_VALUES.name}
+        value={profile.name}
       />
       {formik.errors.name && <FieldErrorMessage message={formik.errors.name} />}
 
@@ -131,7 +135,7 @@ export const ProfileForm: FC<IProps> = ({ onSubmit, id }) => {
         placeholder={t('auth.register.nickNamePlaceholder')}
         onChange={formik.handleChange}
         className="plx-input"
-        defaultValue={INITIAL_VALUES.nickName}
+        value={profile.nickname}
       />
       {formik.errors.nickName && (
         <FieldErrorMessage message={formik.errors.nickName} />
@@ -143,7 +147,7 @@ export const ProfileForm: FC<IProps> = ({ onSubmit, id }) => {
         placeholder={t('auth.register.agePlaceholder')}
         onChange={formik.handleChange}
         className="plx-input"
-        defaultValue={INITIAL_VALUES.age}
+        value={profile.age}
       />
       {formik.errors.age && <FieldErrorMessage message={formik.errors.age} />}
       <ButtonsWrapper>

@@ -14,8 +14,9 @@ import {
   StyledTitle,
 } from './Invitation.styles';
 import { useTranslation } from 'react-i18next';
+import { ICommonProps } from '../../_Types/props';
 
-type InvitationProps = {
+interface InvitationProps extends ICommonProps {
   id: number;
   title: string;
   gameName: string;
@@ -24,12 +25,14 @@ type InvitationProps = {
   contact?: string;
   description: string;
   creationDate?: string;
-  invitationStatus?: string;
+  accepted?: boolean;
+  showAccepted?: boolean;
+  comment?: string;
   gameLogo: {
     src: string;
     alt: string;
   };
-};
+}
 
 export const Invitation: FC<InvitationProps> = ({
   id,
@@ -41,12 +44,15 @@ export const Invitation: FC<InvitationProps> = ({
   description,
   gameLogo,
   creationDate,
-  invitationStatus,
+  accepted,
+  showAccepted,
+  comment,
+  className,
   children,
 }) => {
   const { t } = useTranslation();
   return (
-    <StyledInvitationCard key={id}>
+    <StyledInvitationCard key={id} className={className}>
       <StyledGameInfo>
         <StyledLogoColumn>
           <StyledLogo src={gameLogo.src} alt={gameLogo.alt} />
@@ -66,9 +72,9 @@ export const Invitation: FC<InvitationProps> = ({
             {contact && (
               <StyledInfoRow>
                 <StyledInfoTitle>{t('game.contact')}:</StyledInfoTitle>
-                {!invitationStatus ? (
+                {!accepted ? (
                   <StyledInfoDescription>{contact}</StyledInfoDescription>
-                ) : invitationStatus === 'ACCEPTED' ? (
+                ) : accepted ? (
                   <StyledInfoDescription>{contact}</StyledInfoDescription>
                 ) : (
                   <StyledInfoDescription>*******</StyledInfoDescription>
@@ -85,12 +91,18 @@ export const Invitation: FC<InvitationProps> = ({
                 <StyledInfoDescription>{creationDate}</StyledInfoDescription>
               </StyledInfoRow>
             )}
-            {invitationStatus && (
+            {showAccepted && (
               <StyledInfoRow>
-                <StyledInfoTitle>{t('game.invitationStatus')}:</StyledInfoTitle>
+                <StyledInfoTitle>{t('game.accepted')}:</StyledInfoTitle>
                 <StyledInfoDescription>
-                  {invitationStatus}
+                  {accepted ? accepted.toString() : false.toString()}
                 </StyledInfoDescription>
+              </StyledInfoRow>
+            )}
+            {comment && (
+              <StyledInfoRow>
+                <StyledInfoTitle>{t('game.comment')}:</StyledInfoTitle>
+                <StyledInfoDescription>{comment}</StyledInfoDescription>
               </StyledInfoRow>
             )}
           </StyledInfoBox>

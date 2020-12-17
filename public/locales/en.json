@@ -36,7 +36,8 @@
     "games": "All Games",
     "myGames": "My Games",
     "myInvitations": "My Invitations",
-    "profile": "Profile"
+    "profile": "Profile",
+    "users": "Users"
   },
   "myGames": {
     "label": "My Games",
@@ -70,10 +71,24 @@
     "askForInvite": "Ask For Invite",
     "details": "Details",
     "creationDate": "Creation Date",
-    "invitationStatus": "Invitation Status"
+    "invitationStatus": "Invitation Status",
+    "accepted": "Accepted",
+    "inviteDialog": {
+      "comment": "Comment",
+      "save": "Save",
+      "placeholder": "Fill in message for your invitation",
+      "submit": "Submit",
+      "title": "Send Invite"
+    }
+  },
+  "invitation": {
+    "details": "Details of invitation"
   },
   "profile": {
     "save": "Save",
     "remove": "Remove"
+  },
+  "users": {
+    "details": "Details of user"
   }
 }

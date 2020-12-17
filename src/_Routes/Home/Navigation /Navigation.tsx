@@ -82,6 +82,14 @@ export const NavigationPanel: FC = () => {
         >
           <MyInvitationsIcon isFocused={isActive('/home/my-invitations')} />
         </StyledMenuIconButton>
+        <StyledMenuIconButton
+          isFocused={isActive('/home/users')}
+          isExtended={navBarExpanded}
+          label={t('navBar.users')}
+          linkPath={'/home/users'}
+        >
+          <MyInvitationsIcon isFocused={isActive('/home/users')} />
+        </StyledMenuIconButton>
         <BottomMenuIconButton
           isFocused={isActive('/home/profile')}
           isExtended={navBarExpanded}

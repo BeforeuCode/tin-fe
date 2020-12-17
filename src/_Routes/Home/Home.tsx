@@ -10,6 +10,10 @@ import { EditGame } from './_Routes/MyGames/EditGame/EditGame';
 import { AllGames } from './_Routes/AllGames/AllGames';
 import { Details } from './_Routes/MyGames/Details/Details';
 import { Profile } from './_Routes/Profile/Profile';
+import { GameDetail } from './_Routes/AllGames/GameDetails';
+import { InvitationDetail } from './_Routes/MyInvitations/InvitationDetails';
+import { Users } from './_Routes/Users/Users';
+import { UserDetails } from './_Routes/Users/UserDetails';
 
 export const Home: FC = () => {
   const [navBarExpanded, setNavBarExpanded] = useState<boolean>(true);
@@ -31,11 +35,17 @@ export const Home: FC = () => {
         <Route exact path="/home/games">
           <AllGames />
         </Route>
+        <Route exact path="/home/games/details/:id">
+          <GameDetail />
+        </Route>
         <Route exact path="/home/my-games">
           <MyGames />
         </Route>
         <Route exact path="/home/my-invitations">
           <MyInvitations />
+        </Route>
+        <Route exact path="/home/my-invitations/details/:id">
+          <InvitationDetail />
         </Route>
         <Route exact path="/home/my-games/add">
           <AddNewGame />
@@ -48,6 +58,12 @@ export const Home: FC = () => {
         </Route>
         <Route exact path="/home/profile">
           <Profile />
+        </Route>
+        <Route exact path="/home/users">
+          <Users />
+        </Route>
+        <Route exact path="/home/users/details/:id">
+          <UserDetails />
         </Route>
       </NavigationContext.Provider>
     </HomeBody>

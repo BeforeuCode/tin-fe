@@ -1,110 +1,128 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { NavigationContext } from '../../NavigationContext';
+import { FC, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import React from 'react';
-import { Invitation } from '../../../../_Components/Invitation/Invitation';
-import { TinButton } from '../../../../_Components/TinButton';
 import { useTranslation } from 'react-i18next';
+import { TinCustomTable } from '../../../../_Components/TinCustomTable';
+import { createMyInvitationsConfig, mockData } from './utils';
+import { TinDialog } from '../../../../_Components/TinDialog';
+import { InputSection } from '../MyGames/_Components/InputSection';
 
-const Wrapper = styled.div<{
-  isExpanded: boolean;
-}>`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${({ isExpanded }) =>
-    isExpanded ? 'calc(100% - 23rem)' : 'calc(100% - 8.5rem)'};
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem;
+  width: 100%;
   background: #07061f;
 `;
 
+const HeaderWrapper = styled.div`
+  height: 3rem;
+  background: #252645;
+  border-bottom: 1px solid #2c2c3f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem;
+`;
+
+const Label = styled.div`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 3.3rem;
+  color: #ffffff;
+  margin-left: 3rem;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+`;
+
+const Title = styled.h2`
+  color: #fdfdfd;
+  font-family: 'Muli', sans-serif;
+`;
+
+const DialogWrapper = styled.div`
+  width: 100%;
+  padding: 3rem;
+`;
+
 export const MyInvitations: FC = () => {
-  const history = useHistory();
-  const [myInvitations, setMyInvitations] = useState<any[]>([]);
-  const { navBarExpanded } = useContext(NavigationContext);
   const { t } = useTranslation();
+  const { id } = useParams<{ id: string }>();
+  const history = useHistory();
+  const [config, setConfig] = useState<any>();
+  const [data, setData] = useState<any>();
+  const [comment, setComment] = useState<string>('Let`s Play together!');
+  const [inviteDialogOpen, setInviteDialogOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const seeDetails = (invitationId: number) => {
+    history.push(`my-invitations/details/${invitationId}`);
+  };
+
+  const handleRemove = (invitationId: number) => {
+    console.log(`invite ${invitationId}`);
+  };
+
+  const handleEdit = (invitationId: number) => {
+    setInviteDialogOpen(true);
+  };
 
   useEffect(() => {
-    console.log('getInvitations');
-  }, []);
+    setData(mockData);
+    setConfig(createMyInvitationsConfig(seeDetails, handleRemove, handleEdit));
+    setLoading(false);
+    // eslint-disable-next-line
+  }, [id]);
+
+  const onCloseInvitationDialog = () => {
+    setInviteDialogOpen(false);
+  };
+
+  const handleCommentChange = (
+    eventOrPath: string | React.ChangeEvent<any>
+  ) => {
+    setComment((eventOrPath as React.ChangeEvent<any>).target.value);
+  };
+
+  const handleSendInvite = () => {
+    console.log(comment);
+    setInviteDialogOpen(false);
+  };
 
   return (
-    <Wrapper isExpanded={navBarExpanded}>
-      <ContentWrapper>
-        <Invitation
-          id={0}
-          title="Looking for team for clash - Main Adc - Diamond III"
-          gameName="League of Legends"
-          gameLogo={{
-            src:
-              'https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends-285x380.jpg',
-            alt: 'Photo of LoL',
-          }}
-          date="25.10.2020 19:00"
-          maxPlayers={5}
-          contact="http://discord.gg/HRcbkV"
-          invitationStatus={'ACCEPTED'}
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
-        >
-          <TinButton
-            label={t('game.remove')}
-            variant={'white'}
-            onClick={() => console.log('remove')}
-            size={'small'}
+    <Wrapper>
+      <HeaderWrapper>
+        <Label>
+          {t('myGames.details')}: {id}
+        </Label>
+      </HeaderWrapper>
+      <Content>
+        <Title>Invitations</Title>
+        {!loading && <TinCustomTable data={data} config={config} />}
+      </Content>
+      <TinDialog
+        title={t('game.inviteDialog.title')}
+        open={inviteDialogOpen}
+        onClose={onCloseInvitationDialog}
+        saveButtonLabel={t('game.inviteDialog.save')}
+        onSave={handleSendInvite}
+      >
+        <DialogWrapper>
+          <InputSection
+            title={t('game.inviteDialog.comment')}
+            placeholder={t('game.inviteDialog.placeholder')}
+            required
+            fieldName={'comment'}
+            handleChange={handleCommentChange}
+            value={comment}
           />
-        </Invitation>
-        <Invitation
-          id={0}
-          title="Looking for team for clash - Main Adc - Diamond III"
-          gameName="League of Legends"
-          gameLogo={{
-            src:
-              'https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends-285x380.jpg',
-            alt: 'Photo of LoL',
-          }}
-          date="25.10.2020 19:00"
-          maxPlayers={5}
-          contact="http://discord.gg/HRcbkV"
-          invitationStatus={'REJECTED'}
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
-        >
-          <TinButton
-            label={t('game.remove')}
-            variant={'white'}
-            onClick={() => console.log('remove')}
-            size={'small'}
-          />
-        </Invitation>
-        <Invitation
-          id={0}
-          title="Looking for team for clash - Main Adc - Diamond III"
-          gameName="League of Legends"
-          invitationStatus={'ACCEPTED'}
-          gameLogo={{
-            src:
-              'https://static-cdn.jtvnw.net/ttv-boxart/League%20of%20Legends-285x380.jpg',
-            alt: 'Photo of LoL',
-          }}
-          date="25.10.2020 19:00"
-          maxPlayers={5}
-          contact="http://discord.gg/HRcbkV"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
-        >
-          <TinButton
-            label={t('game.remove')}
-            variant={'white'}
-            onClick={() => console.log('remove')}
-            size={'small'}
-          />
-        </Invitation>
-      </ContentWrapper>
+        </DialogWrapper>
+      </TinDialog>
     </Wrapper>
   );
 };

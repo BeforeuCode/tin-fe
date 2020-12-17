@@ -1,29 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from '@emotion/styled';
 import { useHistory, useParams } from 'react-router-dom';
-import { Invitation } from '../../../../../_Components/Invitation/Invitation';
-import { TinButton } from '../../../../../_Components/TinButton';
-import { TinCustomTable } from '../../../../../_Components/TinCustomTable';
-import { createInvitationsConfig, mockData } from './utils';
+import { createInvitationsConfig, mockData } from '../MyGames/Details/utils';
+import styled from '@emotion/styled';
+import { Invitation } from '../../../../_Components/Invitation/Invitation';
+import { TinButton } from '../../../../_Components/TinButton';
+import { TinDialog } from '../../../../_Components/TinDialog';
+import { InputSection } from '../MyGames/_Components/InputSection';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   background: #07061f;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem;
-`;
-
-const InvitationsWrapper = styled.div`
-  margin-top: 2rem;
-  width: 80%;
 `;
 
 const HeaderWrapper = styled.div`
@@ -45,37 +34,52 @@ const Label = styled.div`
   margin-left: 3rem;
 `;
 
-const StyledButton = styled(TinButton)`
-  margin-right: 2rem;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem;
 `;
 
-const Title = styled.h2`
-  color: #fdfdfd;
-  font-family: 'Muli', sans-serif;
+const DialogWrapper = styled.div`
+  width: 100%;
+  padding: 3rem;
 `;
 
-const handleReject = (invitationId: number) => {
-  console.log(`reject ${invitationId}`);
-};
-
-const handleInvite = (invitationId: number) => {
-  console.log(`invite ${invitationId}`);
-};
-
-export const Details: FC = () => {
+export const GameDetail: FC = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
   const [config, setConfig] = useState<any>();
+  const [comment, setComment] = useState<string>();
   const [data, setData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [inviteDialogOpen, setInviteDialogOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setData(mockData);
-    setConfig(createInvitationsConfig(handleInvite, handleReject));
     setLoading(false);
     // eslint-disable-next-line
   }, [id]);
+
+  const onOpenInvitationDialog = () => {
+    setInviteDialogOpen(true);
+  };
+
+  const onCloseInvitationDialog = () => {
+    setInviteDialogOpen(false);
+  };
+
+  const handleCommentChange = (
+    eventOrPath: string | React.ChangeEvent<any>
+  ) => {
+    setComment((eventOrPath as React.ChangeEvent<any>).target.value);
+  };
+
+  const handleSendInvite = () => {
+    console.log(comment);
+    setInviteDialogOpen(false);
+  };
 
   return (
     <Wrapper>
@@ -100,22 +104,30 @@ export const Details: FC = () => {
           contact="http://discord.gg/HRcbkV"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam pulvinar velit, scelerisque accumsan nulla rhoncus at. Nulla bibendum leo id posuere or, convallis urna at, ultricies lorem."
         >
-          <StyledButton
-            label={t('game.remove')}
-            onClick={() => console.log('remove')}
-            size={'small'}
-          />
           <TinButton
-            label={t('game.edit')}
-            variant={'white'}
-            onClick={() => history.push('/home/my-games/edit/2')}
+            label={t('game.askForInvite')}
+            onClick={onOpenInvitationDialog}
             size={'small'}
           />
         </Invitation>
-        <InvitationsWrapper>
-          <Title>Invitations</Title>
-          {!loading && <TinCustomTable data={data} config={config} />}
-        </InvitationsWrapper>
+        <TinDialog
+          title={t('game.inviteDialog.title')}
+          open={inviteDialogOpen}
+          onClose={onCloseInvitationDialog}
+          saveButtonLabel={t('game.inviteDialog.submit')}
+          onSave={handleSendInvite}
+        >
+          <DialogWrapper>
+            <InputSection
+              title={t('game.inviteDialog.comment')}
+              placeholder={t('game.inviteDialog.placeholder')}
+              required
+              fieldName={'comment'}
+              handleChange={handleCommentChange}
+              value={comment}
+            />
+          </DialogWrapper>
+        </TinDialog>
       </Content>
     </Wrapper>
   );
