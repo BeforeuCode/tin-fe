@@ -1,8 +1,7 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { IGame, IGameForm } from '../../../types';
+import { IGameForm } from '../../../types';
 import {
   prepareRequiredFieldsValidation,
   prepareRequiredFormValidation,
@@ -10,22 +9,23 @@ import {
 import { InputSection } from './InputSection';
 import { FieldErrorMessage } from '../../../../../_Components/Forms/FormErrorMessage';
 import styled from '@emotion/styled';
-import { SelectSection } from './SelectSection';
 import { TinButton } from '../../../../../_Components/TinButton';
+import { format } from 'date-fns';
 
 const INITIAL_VALUES: IGameForm = {
   contact: '',
   date: undefined,
   description: '',
-  game: '',
+  gameName: '',
   maxPlayers: undefined,
   title: '',
 };
+
 const REQUIRED_FIELDS = [
   'contact',
   'date',
   'description',
-  'game',
+  'gameName',
   'maxPlayers',
   'title',
 ];
@@ -44,23 +44,20 @@ const StyledButton = styled(TinButton)`
   margin-top: 2rem;
 `;
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 interface IProps {
   onSubmit: (form: any) => void;
-  id?: string;
+  game?: any;
+  newGame?: boolean;
 }
 
-export const GameForm: FC<IProps> = ({ onSubmit, id }) => {
+export const GameForm: FC<IProps> = ({ onSubmit, game, newGame }) => {
   const { t } = useTranslation();
-  const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const [game, setGame] = useState<IGame>();
-
-  useEffect(() => {
-    if (id) {
-      console.log(`fetch data ${id}`);
-    }
-    // eslint-disable-next-line
-  }, [id]);
 
   const requiredFieldsValidation = prepareRequiredFieldsValidation(
     REQUIRED_FIELDS,
@@ -87,6 +84,23 @@ export const GameForm: FC<IProps> = ({ onSubmit, id }) => {
     formik.handleSubmit();
   };
 
+  const fillForm = (form: any) => {
+    formik.setValues({
+      title: form.title,
+      gameName: form.gameName,
+      description: form.description,
+      date: format(new Date(form.date), "yyyy-MM-dd'T'hh:mm"),
+      contact: form.contact,
+      maxPlayers: form.maxPlayers,
+    });
+  };
+
+  useEffect(() => {
+    if (game) {
+      fillForm(game);
+    }
+  }, [game]);
+
   return (
     <>
       <Wrapper>
@@ -96,7 +110,7 @@ export const GameForm: FC<IProps> = ({ onSubmit, id }) => {
           required
           fieldName={'title'}
           handleChange={formik.handleChange}
-          value={game?.title}
+          value={formik.values?.title}
         />
         {formik.errors.title && (
           <FieldErrorMessage message={formik.errors.title} />
@@ -108,31 +122,22 @@ export const GameForm: FC<IProps> = ({ onSubmit, id }) => {
           type={'datetime-local'}
           fieldName={'date'}
           handleChange={formik.handleChange}
-          value={game?.date}
+          value={formik.values?.date}
         />
         {formik.errors.date && (
           <FieldErrorMessage message={formik.errors.date} />
         )}
-        <SelectSection
-          title={t('addGame.game')}
-          placeholder={t('addGame.gamePlaceholder')}
+
+        <InputSection
+          title={t('addGame.gameName')}
+          placeholder={t('addGame.gameNamePlaceholder')}
           required
-          fieldName={'game'}
+          fieldName={'gameName'}
           handleChange={formik.handleChange}
-          value={game?.game}
-          options={[
-            {
-              value: 'LOL',
-              label: 'League of Legends',
-            },
-            {
-              value: 'CSGO',
-              label: 'CS:GO',
-            },
-          ]}
+          value={formik.values?.gameName}
         />
-        {formik.errors.game && (
-          <FieldErrorMessage message={formik.errors.game} />
+        {formik.errors.gameName && (
+          <FieldErrorMessage message={formik.errors.gameName} />
         )}
         <InputSection
           title={t('addGame.maxPlayers')}
@@ -141,7 +146,7 @@ export const GameForm: FC<IProps> = ({ onSubmit, id }) => {
           type={'number'}
           fieldName={'maxPlayers'}
           handleChange={formik.handleChange}
-          value={game?.players.maxPlayers}
+          value={formik.values?.maxPlayers}
         />
         {formik.errors.maxPlayers && (
           <FieldErrorMessage message={formik.errors.maxPlayers} />
@@ -163,12 +168,22 @@ export const GameForm: FC<IProps> = ({ onSubmit, id }) => {
           required
           fieldName={'description'}
           handleChange={formik.handleChange}
-          value={game?.description}
+          value={formik.values?.description}
         />
         {formik.errors.description && (
           <FieldErrorMessage message={formik.errors.description} />
         )}
-        <StyledButton onClick={handleSubmit} label={t('addGame.submit')} />
+        {newGame ? (
+          <StyledButton onClick={handleSubmit} label={t('addGame.submit')} />
+        ) : (
+          <ButtonsWrapper>
+            <TinButton
+              onClick={handleSubmit}
+              label={t('profile.save')}
+              variant={'white'}
+            />
+          </ButtonsWrapper>
+        )}
       </Wrapper>
     </>
   );

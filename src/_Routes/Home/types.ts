@@ -1,7 +1,9 @@
 export interface IGame {
   id: string;
+  gamerId?: string;
   title: string;
-  game: string;
+  gameName: string;
+  creationDate: string;
   date: string;
   players: IPlayers;
   contact: string;
@@ -10,8 +12,8 @@ export interface IGame {
 
 export interface IGameForm {
   title: string;
-  game: string;
-  date?: Date;
+  gameName: string;
+  date?: string;
   maxPlayers?: number;
   contact: string;
   description: string;

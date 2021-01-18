@@ -1,5 +1,4 @@
-import React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuthPageWrapper } from '../../_Components/AuthPageWrapper';
 import styled from '@emotion/styled';

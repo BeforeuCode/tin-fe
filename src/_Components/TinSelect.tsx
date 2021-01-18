@@ -11,7 +11,7 @@ const Select = styled.select<{ initial: boolean }>`
   margin: 2rem 0 2rem 0;
   font-family: 'Muli', sans-serif;
   font-size: 2rem;
-  color: ${({ initial }) => (initial ? '#fff' : 'gray')};
+  color: ${({ initial }) => (initial ? 'gray' : '#fff')};
   height: 54px;
   box-shadow: 0 2px 4px rgba(14, 37, 84, 0.22);
   border-radius: 3px;
@@ -57,11 +57,18 @@ export const TinSelect: FC<IInputProps> = ({
 }) => {
   const ref = useRef<HTMLSelectElement>(null);
   const [val, setVal] = useState('');
+
   useEffect(() => {
     if (ref && ref.current) {
       setVal(ref.current.value);
     }
   }, [ref]);
+
+  useEffect(() => {
+    if (value) {
+      setVal(value);
+    }
+  }, [value]);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setVal(event.target.value);
@@ -76,7 +83,7 @@ export const TinSelect: FC<IInputProps> = ({
       disabled={disabled}
       required={required}
       name={name}
-      initial={!!val}
+      initial={val === ''}
       onChange={handleChange}
     >
       <Placeholder label={placeholder} selected disabled />

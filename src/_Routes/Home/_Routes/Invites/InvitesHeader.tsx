@@ -27,22 +27,22 @@ const LaunchButton = styled(TinButton)`
 `;
 
 interface IProps {
-  onAddGame?: () => void;
+  addInvite?: () => void;
 }
 
-export const MyGamesHeader: FC<IProps> = ({ onAddGame }) => {
+export const InvitesHeader: FC<IProps> = ({ addInvite }) => {
   const { t } = useTranslation();
-  const handleAddGame = () => {
-    onAddGame && onAddGame();
+  const handleAddInvite = () => {
+    addInvite && addInvite();
   };
   return (
     <Wrapper>
-      <Label>{t('myGames.label')}</Label>
+      <Label>{t('invite.label')}</Label>
       <LaunchButton
         size={'small'}
         variant={'white'}
-        label={t('myGames.button')}
-        onClick={handleAddGame}
+        label={t('invite.button')}
+        onClick={handleAddInvite}
       />
     </Wrapper>
   );

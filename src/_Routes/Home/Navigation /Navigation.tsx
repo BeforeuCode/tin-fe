@@ -67,37 +67,21 @@ export const NavigationPanel: FC = () => {
           <DashboardIcon isFocused={isActive('/home/games')} />
         </StyledMenuIconButton>
         <StyledMenuIconButton
-          isFocused={isActive('/home/my-games')}
-          isExtended={navBarExpanded}
-          label={t('navBar.myGames')}
-          linkPath={'/home/my-games'}
-        >
-          <MyGamesIcon isFocused={isActive('/home/my-games')} />
-        </StyledMenuIconButton>
-        <StyledMenuIconButton
-          isFocused={isActive('/home/my-invitations')}
+          isFocused={isActive('/home/invites')}
           isExtended={navBarExpanded}
           label={t('navBar.myInvitations')}
-          linkPath={'/home/my-invitations'}
+          linkPath={'/home/invites'}
         >
-          <MyInvitationsIcon isFocused={isActive('/home/my-invitations')} />
+          <MyInvitationsIcon isFocused={isActive('/home/invites')} />
         </StyledMenuIconButton>
         <StyledMenuIconButton
-          isFocused={isActive('/home/users')}
+          isFocused={isActive('/home/gamers')}
           isExtended={navBarExpanded}
           label={t('navBar.users')}
-          linkPath={'/home/users'}
+          linkPath={'/home/gamers'}
         >
-          <MyInvitationsIcon isFocused={isActive('/home/users')} />
+          <MyInvitationsIcon isFocused={isActive('/home/gamers')} />
         </StyledMenuIconButton>
-        <BottomMenuIconButton
-          isFocused={isActive('/home/profile')}
-          isExtended={navBarExpanded}
-          label={t('navBar.profile')}
-          linkPath={'/home/profile'}
-        >
-          <MyInvitationsIcon isFocused={isActive('/home/profile')} />
-        </BottomMenuIconButton>
       </Drawer>
       <PanelSwitcher isExtended={navBarExpanded} onClick={handleDrawerOpen} />
     </Wrapper>

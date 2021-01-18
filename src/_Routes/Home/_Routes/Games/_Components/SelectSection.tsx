@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
-import { TinInput } from '../../../../../_Components/TinInput';
 import { FormSection } from './FormSection';
 import { ICommonProps } from '../../../../../_Types/props';
 import styled from '@emotion/styled';
+import { ISelectOption, TinSelect } from '../../../../../_Components/TinSelect';
 
 interface IProps extends ICommonProps {
   placeholder?: string;
@@ -14,24 +14,22 @@ interface IProps extends ICommonProps {
   type?: string;
   typeNumber?: boolean;
   setFieldValue?: (field: string, value: any, shouldValidate?: boolean) => void;
-
+  options: ISelectOption[];
   handleChange?: (
     eventOrPath: string | React.ChangeEvent<any>
   ) => void | ((eventOrTextValue: string | React.ChangeEvent<any>) => void);
   disabled?: boolean;
 }
 
-const StyledInput = styled(TinInput)`
+const StyledSelect = styled(TinSelect)`
   width: 100%;
   margin: 1rem 0 1rem 0;
 `;
 
-export const InputSection: FC<IProps> = ({
+export const SelectSection: FC<IProps> = ({
   value,
   title,
   required,
-  type,
-  typeNumber,
   fieldName,
   placeholder,
   label,
@@ -39,14 +37,15 @@ export const InputSection: FC<IProps> = ({
   className,
   setFieldValue,
   disabled,
+  options,
 }) => {
-  const [inputValue, setInputValue] = useState<unknown>();
+  const [inputValue, setInputValue] = useState(value);
 
   useEffect(() => {
     if (value) {
-      setInputValue(typeNumber ? (value as number) : value);
+      setInputValue(value);
     }
-  }, [value, typeNumber]);
+  }, [value]);
 
   useEffect(() => {
     if (setFieldValue) {
@@ -55,33 +54,23 @@ export const InputSection: FC<IProps> = ({
     // eslint-disable-next-line
   }, [inputValue]);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    let { value } = event.target;
-    if (typeNumber) {
-      value = value.replace(/\D/, '');
-      setInputValue(value);
-      if (handleChange) {
-        event.target.value = value;
-        handleChange(event);
-      }
-    } else {
-      setInputValue(value);
-      if (handleChange) {
-        handleChange(event);
-      }
+  const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setInputValue(value);
+    if (handleChange) {
+      handleChange(event);
     }
   };
 
   return (
     <FormSection className={className} title={title} required={required}>
-      <StyledInput
+      <StyledSelect
         disabled={disabled}
-        type={type}
-        value={value}
         name={fieldName}
         onChange={onChange}
         label={label}
+        value={inputValue}
         placeholder={placeholder}
+        options={options}
       />
     </FormSection>
   );

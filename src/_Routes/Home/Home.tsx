@@ -3,17 +3,15 @@ import React, { FC, useState } from 'react';
 import { NavigationPanel } from './Navigation /Navigation';
 import { INavigationContext, NavigationContext } from './NavigationContext';
 import { Route } from 'react-router-dom';
-import { MyGames } from './_Routes/MyGames/MyGames';
-import { AddNewGame } from './_Routes/MyGames/AddNewGame/AddNewGame';
-import { MyInvitations } from './_Routes/MyInvitations/MyInvitations';
-import { EditGame } from './_Routes/MyGames/EditGame/EditGame';
-import { AllGames } from './_Routes/AllGames/AllGames';
-import { Details } from './_Routes/MyGames/Details/Details';
-import { Profile } from './_Routes/Profile/Profile';
-import { GameDetail } from './_Routes/AllGames/GameDetails';
-import { InvitationDetail } from './_Routes/MyInvitations/InvitationDetails';
-import { Users } from './_Routes/Users/Users';
-import { UserDetails } from './_Routes/Users/UserDetails';
+import { AddNewGame } from './_Routes/Games/AddNewGame/AddNewGame';
+import { Invites } from './_Routes/Invites/Invites';
+import { Games } from './_Routes/Games/Games';
+import { InviteDetails } from './_Routes/Invites/InvitesDetails';
+import { Gamers } from './_Routes/Gamers/Gamers';
+import { GameDetail } from './_Routes/Games/GameDetail';
+import { AddNewInvite } from './_Routes/Invites/AddNewInvite/AddNewInvite';
+import { GamerDetails } from './_Routes/Gamers/GamerDetails';
+import { AddNewGamer } from './_Routes/Gamers/AddNewGamer/AddNewGamer';
 
 export const Home: FC = () => {
   const [navBarExpanded, setNavBarExpanded] = useState<boolean>(true);
@@ -33,37 +31,31 @@ export const Home: FC = () => {
       <NavigationContext.Provider value={context}>
         <NavigationPanel />
         <Route exact path="/home/games">
-          <AllGames />
+          <Games />
         </Route>
         <Route exact path="/home/games/details/:id">
           <GameDetail />
         </Route>
-        <Route exact path="/home/my-games">
-          <MyGames />
-        </Route>
-        <Route exact path="/home/my-invitations">
-          <MyInvitations />
-        </Route>
-        <Route exact path="/home/my-invitations/details/:id">
-          <InvitationDetail />
-        </Route>
-        <Route exact path="/home/my-games/add">
+        <Route exact path="/home/games/add">
           <AddNewGame />
         </Route>
-        <Route exact path="/home/my-games/edit/:id">
-          <EditGame />
+        <Route exact path="/home/invites">
+          <Invites />
         </Route>
-        <Route exact path="/home/my-games/details/:id">
-          <Details />
+        <Route exact path="/home/invites/details/:id">
+          <InviteDetails />
         </Route>
-        <Route exact path="/home/profile">
-          <Profile />
+        <Route exact path="/home/invites/add">
+          <AddNewInvite />
         </Route>
-        <Route exact path="/home/users">
-          <Users />
+        <Route exact path="/home/gamers">
+          <Gamers />
         </Route>
-        <Route exact path="/home/users/details/:id">
-          <UserDetails />
+        <Route exact path="/home/gamers/add">
+          <AddNewGamer />
+        </Route>
+        <Route exact path="/home/gamers/details/:id">
+          <GamerDetails />
         </Route>
       </NavigationContext.Provider>
     </HomeBody>

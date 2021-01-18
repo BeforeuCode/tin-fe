@@ -1,16 +1,15 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 import {
   prepareRequiredFieldsValidation,
   prepareRequiredFormValidation,
 } from '../../../../_Components/Forms/form-utils';
 import { useFormik } from 'formik';
-import { TinInput } from '../../../../_Components/TinInput';
 import { FieldErrorMessage } from '../../../../_Components/Forms/FormErrorMessage';
 import styled from '@emotion/styled';
 import { TinButton } from '../../../../_Components/TinButton';
 import { ICommonProps } from '../../../../_Types/props';
+import { InputSection } from '../Games/_Components/InputSection';
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -27,37 +26,24 @@ const Wrapper = styled.div`
 `;
 
 const INITIAL_VALUES = {
-  email: 'joe.doe@gmail.com',
-  password: '',
-  name: 'Joe Doe',
-  nickName: 'DoeDoe11',
-  age: '21',
+  email: '',
+  name: '',
+  nickname: '',
+  age: '',
 };
 
-const REQUIRED_FIELDS = ['email', 'password', 'name', 'nickName', 'age'];
+const REQUIRED_FIELDS = ['email', 'name', 'nickname', 'age'];
 
 const requiredFormValidation = prepareRequiredFormValidation(REQUIRED_FIELDS);
 
 interface IProps extends ICommonProps {
   onSubmit: (form: any) => void;
+  gamerData?: any;
   id?: string;
 }
 
-export const ProfileForm: FC<IProps> = ({ onSubmit, id, className }) => {
+export const ProfileForm: FC<IProps> = ({ onSubmit, className, gamerData }) => {
   const { t } = useTranslation();
-  const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState<any>({
-    id: 2,
-    name: 'Jane',
-    email: 'JaneDoe21@gmail.com',
-    nickname: 'JD21',
-    age: 21,
-  });
-
-  useEffect(() => {
-    // eslint-disable-next-line
-  });
 
   const requiredFieldsValidation = prepareRequiredFieldsValidation(
     REQUIRED_FIELDS,
@@ -67,16 +53,12 @@ export const ProfileForm: FC<IProps> = ({ onSubmit, id, className }) => {
   const formik = useFormik({
     initialValues: INITIAL_VALUES,
     onSubmit: (form) => {
-      console.log(formik.values);
       if (requiredFormValidation(form)) {
         onSubmit(form);
       }
     },
     validate: (form) => {
       const errors = requiredFieldsValidation(form);
-      if (form.password && form.password.length < 8) {
-        errors.password = t('auth.register.errors.passwordTooShort');
-      }
       return errors;
     },
     validateOnMount: false,
@@ -88,74 +70,68 @@ export const ProfileForm: FC<IProps> = ({ onSubmit, id, className }) => {
     formik.handleSubmit();
   };
 
-  const handleRemove = () => {
-    console.log('remove');
+  const fillForm = (form: any) => {
+    formik.setValues({
+      age: form.age,
+      nickname: form.nickname,
+      email: form.email,
+      name: form.name,
+    });
   };
+
+  useEffect(() => {
+    if (gamerData) {
+      fillForm(gamerData);
+    }
+  }, [gamerData]);
 
   return (
     <Wrapper className={className}>
-      <TinInput
-        name="email"
-        label={t('auth.register.email')}
+      <InputSection
+        fieldName="email"
+        title={t('auth.register.email')}
+        required
         placeholder={t('auth.register.emailPlaceholder')}
-        onChange={formik.handleChange}
+        handleChange={formik.handleChange}
         className="plx-input"
-        value={profile.email}
+        value={formik.values.email}
       />
       {formik.errors.email && (
         <FieldErrorMessage message={formik.errors.email} />
       )}
-
-      <TinInput
-        name="password"
-        type="password"
-        label={t('auth.register.password')}
-        placeholder={t('auth.register.passwordPlaceholder')}
-        onChange={formik.handleChange}
-        className="plx-input"
-        value={profile.password}
-      />
-      {formik.errors.password && (
-        <FieldErrorMessage message={formik.errors.password} />
-      )}
-
-      <TinInput
-        name="name"
-        label={t('auth.register.name')}
+      <InputSection
+        fieldName="name"
+        title={t('auth.register.name')}
+        required
         placeholder={t('auth.register.namePlaceholder')}
-        onChange={formik.handleChange}
+        handleChange={formik.handleChange}
         className="plx-input"
-        value={profile.name}
+        value={formik.values.name}
       />
       {formik.errors.name && <FieldErrorMessage message={formik.errors.name} />}
-
-      <TinInput
-        name="nickName"
-        label={t('auth.register.nickName')}
+      <InputSection
+        fieldName="nickname"
+        title={t('auth.register.nickName')}
+        required
         placeholder={t('auth.register.nickNamePlaceholder')}
-        onChange={formik.handleChange}
+        handleChange={formik.handleChange}
         className="plx-input"
-        value={profile.nickname}
+        value={formik.values.nickname}
       />
-      {formik.errors.nickName && (
-        <FieldErrorMessage message={formik.errors.nickName} />
+      {formik.errors.nickname && (
+        <FieldErrorMessage message={formik.errors.nickname} />
       )}
-
-      <TinInput
-        name="age"
-        label={t('auth.register.age')}
+      <InputSection
+        fieldName="age"
+        title={t('auth.register.age')}
+        required
         placeholder={t('auth.register.agePlaceholder')}
-        onChange={formik.handleChange}
+        handleChange={formik.handleChange}
         className="plx-input"
-        value={profile.age}
+        value={formik.values.age}
       />
       {formik.errors.age && <FieldErrorMessage message={formik.errors.age} />}
       <ButtonsWrapper>
-        <TinButton
-          onClick={handleRemove}
-          label={t('profile.remove')}
-          variant={'flat'}
-        />
         <TinButton
           onClick={handleSubmit}
           label={t('profile.save')}

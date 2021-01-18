@@ -26,7 +26,7 @@ const Button = styled.a`
   box-shadow: 0 0 0 1px inset rgba(236, 232, 225, 0.3);
   position: relative;
   margin: 10px 0;
-  min-width: 200px;
+  min-width: 150px;
   &:hover {
     cursor: pointer;
   }

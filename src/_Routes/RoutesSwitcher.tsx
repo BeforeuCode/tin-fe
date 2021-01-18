@@ -4,7 +4,6 @@ import { IState } from '../_State';
 import { useSelector } from 'react-redux';
 import { Auth } from './Auth/Auth';
 import { Home } from './Home/Home';
-import { MyGames } from './Home/_Routes/MyGames/MyGames';
 
 export const RoutesSwitcher: FC = () => {
   const location = useLocation();

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { ICommonProps } from '../_Types/props';
 
@@ -37,6 +37,7 @@ export interface IInputProps extends ICommonProps {
 export const TinInput: FC<IInputProps> = ({
   placeholder,
   value,
+  defaultValue,
   type,
   disabled,
   required,
@@ -49,6 +50,7 @@ export const TinInput: FC<IInputProps> = ({
       className={className}
       placeholder={placeholder}
       value={value}
+      defaultValue={defaultValue}
       type={type}
       disabled={disabled}
       required={required}

@@ -16,10 +16,15 @@
       "singUpTitle": "Sing Up",
       "singUpSubtitle": "Join our community and find new friends to play with",
       "emailPlaceholder": "Email",
+      "email": "Email",
       "passwordPlaceholder": "Password",
+      "password": "Password",
       "namePlaceholder": "Name",
+      "name": "Name",
       "nickNamePlaceholder": "Nickname",
+      "nickName": "Nickname",
       "agePlaceholder": "Age",
+      "age": "Age",
       "singUp": "Sing Up",
       "confirmTitle": "You've been registered!",
       "confirm": "You can now log in and use the application",
@@ -33,20 +38,22 @@
     "reqField": "This field is required"
   },
   "navBar": {
-    "games": "All Games",
+    "games": "Games",
     "myGames": "My Games",
-    "myInvitations": "My Invitations",
+    "myInvitations": "Invites",
     "profile": "Profile",
-    "users": "Users"
+    "users": "Gamers"
   },
   "myGames": {
-    "label": "My Games",
+    "label": "Games",
     "button": "ADD NEW GAME",
     "addNewGame": "Add new game",
     "details": "Details of game",
     "profile": "Profile"
   },
   "addGame": {
+    "gamerId": "Gamer",
+    "gamerIdPlaceholder": "Fill in Gamer...",
     "title": "Title",
     "titlePlaceholder": "Fill in title...",
     "date": "Date",
@@ -57,9 +64,10 @@
     "contactPlaceholder": "Fill in contact information...",
     "description": "Description",
     "descriptionPlaceholder": "Fill in description...",
-    "game": "Game",
-    "gamePlaceholder": "Select your game...",
-    "submit": "Submit"
+    "gameName": "Game",
+    "gameNamePlaceholder": "Select your game...",
+    "submit": "Submit",
+    "creationDate": "Creation Date"
   },
   "game": {
     "date": "Date",
@@ -69,7 +77,7 @@
     "edit": "Edit",
     "remove": "Remove",
     "askForInvite": "Ask For Invite",
-    "details": "Details",
+    "details": "Details of Game ",
     "creationDate": "Creation Date",
     "invitationStatus": "Invitation Status",
     "accepted": "Accepted",
@@ -90,5 +98,31 @@
   },
   "users": {
     "details": "Details of user"
+  },
+  "table": {
+    "details": "Details",
+    "remove": "Remove",
+    "games": "Games",
+    "invites": "Invites"
+  },
+  "invite": {
+    "label": "Invites",
+    "button": "Add New Invite",
+    "gamerId": "Gamer",
+    "gameId": "Game",
+    "gameIdPlaceholder": "Fill in Game...",
+    "sentDate": "Sent Date",
+    "comments": "Comment",
+    "commentsPlaceholder": "Fill in Comment...",
+    "isAccepted": "Accepted",
+    "isAcceptedPlaceholder": "Yes/No",
+    "addNewInvite": "Add New Invite",
+    "details": "Details of Invite"
+  },
+  "gamers": {
+    "label": "Gamers",
+    "button": "Add new Gamer",
+    "details": "Details of Gamer",
+    "addNewGamer": "Add New Gamer"
   }
 }

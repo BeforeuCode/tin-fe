@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import { GameForm } from '../_Components/GameForm';
 import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { InviteForm } from '../_Components/InviteForm';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,9 +30,8 @@ const Content = styled.div`
   display: flex;
 `;
 
-export const EditGame: FC = () => {
+export const AddNewInvite: FC = () => {
   const { t } = useTranslation();
-  const { id } = useParams<{ id: string }>();
 
   const handleSubmit = () => {
     console.log('submit');
@@ -42,10 +40,10 @@ export const EditGame: FC = () => {
   return (
     <Wrapper>
       <HeaderWrapper>
-        <Label>{t('myGames.addNewGame')}</Label>
+        <Label>{t('invite.addNewInvite')}</Label>
       </HeaderWrapper>
       <Content>
-        <GameForm id={id} onSubmit={handleSubmit} />
+        <InviteForm onSubmit={handleSubmit} />
       </Content>
     </Wrapper>
   );

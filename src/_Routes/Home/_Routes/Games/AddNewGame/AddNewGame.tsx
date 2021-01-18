@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { GameForm } from '../_Components/GameForm';
 import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import { createGame } from '../games-api';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,9 +34,12 @@ const Content = styled.div`
 
 export const AddNewGame: FC = () => {
   const { t } = useTranslation();
+  const history = useHistory();
 
-  const handleSubmit = () => {
-    console.log('submit');
+  const handleSubmit = (form: any) => {
+    createGame(form).then(() => {
+      history.push(`/home/games`);
+    });
   };
 
   return (

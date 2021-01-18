@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-
 import styled from '@emotion/styled';
-import { ProfileForm } from './ProfileForm';
+import { useTranslation } from 'react-i18next';
+import { ProfileForm } from '../ProfileForm';
+import { useHistory } from 'react-router-dom';
+import { createGamer, updateGamer } from '../gamers-api';
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,20 +32,23 @@ const Content = styled.div`
   display: flex;
 `;
 
-export const Profile: FC = () => {
+export const AddNewGamer: FC = () => {
   const { t } = useTranslation();
+  const history = useHistory();
 
-  const handleSubmit = () => {
-    console.log('submit');
+  const handleSubmit = (form: any) => {
+    return createGamer(form).then(() => {
+      history.push(`/home/gamers`);
+    });
   };
 
   return (
     <Wrapper>
       <HeaderWrapper>
-        <Label>{t('myGames.profile')}</Label>
+        <Label>{t('gamers.addNewGamer')}</Label>
       </HeaderWrapper>
       <Content>
-        <ProfileForm onSubmit={handleSubmit} id={'5'} />
+        <ProfileForm onSubmit={handleSubmit} />
       </Content>
     </Wrapper>
   );
