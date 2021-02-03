@@ -1,7 +1,7 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { NavigationContext } from '../../NavigationContext';
 import { InviteForm } from './_Components/InviteForm';
 import { getInviteDetails, updateInvite } from './invites-api';
@@ -47,6 +47,7 @@ export const InviteDetails: FC = () => {
   const [data, setData] = useState();
   const { id } = useParams<{ id: string }>();
   const { navBarExpanded } = useContext(NavigationContext);
+  const history = useHistory();
 
   const fetchInviteDetails = () => {
     return getInviteDetails(+id).then((invite) => {
@@ -65,9 +66,8 @@ export const InviteDetails: FC = () => {
     };
 
     return updateInvite(+id, mappedForm).then(() => {
-      fetchInviteDetails().then(() => {
-        setLoading(false);
-      });
+      history.push(`/home/invites`);
+      setLoading(false);
     });
   };
 

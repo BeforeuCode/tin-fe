@@ -98,6 +98,9 @@ export const InviteForm: FC<IProps> = ({
     },
     validate: (form) => {
       const errors = requiredFieldsValidation(form);
+      if (form.comment.length >= 200) {
+        errors.comment = 'Comment must be max 200 characters';
+      }
       return errors;
     },
     validateOnMount: false,

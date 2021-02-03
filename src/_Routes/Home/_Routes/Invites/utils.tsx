@@ -29,7 +29,7 @@ export const createMyInvitationsConfig = (
     {
       name: 'Accepted',
       renderCell(value: any): ReactElement {
-        return <span>{value.accepted ? 'True' : 'False'}</span>;
+        return <span>{value.isAccepted ? 'True' : 'False'}</span>;
       },
     },
     {
@@ -81,7 +81,7 @@ export const createInvitationDetailsConfig = (
     {
       name: 'Accepted',
       renderCell(value: any): ReactElement {
-        return <span>{value.accepted ? 'True' : 'False'}</span>;
+        return <span>{value.isAccepted ? 'True' : 'False'}</span>;
       },
     },
     {

@@ -73,6 +73,24 @@ export const GameForm: FC<IProps> = ({ onSubmit, game, newGame }) => {
     },
     validate: (form) => {
       const errors = requiredFieldsValidation(form);
+      if (form.title.length >= 200) {
+        errors.title = 'Title must be max 200 characters';
+      }
+      if (form.gameName.length >= 200) {
+        errors.gameName = 'Game name must be max 200 characters';
+      }
+      if (form.description.length >= 200) {
+        errors.description = 'Description must be max 200 characters';
+      }
+      if (form.contact.length >= 200) {
+        errors.contact = 'Contact must be max 200 characters';
+      }
+      if (form.maxPlayers && form.maxPlayers <= 1) {
+        errors.age = 'Max players should not be less than 1';
+      }
+      if (form.maxPlayers && form.maxPlayers >= 100) {
+        errors.age = 'Max players should not be greater than 100';
+      }
       return errors;
     },
     validateOnMount: false,

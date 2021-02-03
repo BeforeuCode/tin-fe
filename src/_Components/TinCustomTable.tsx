@@ -105,7 +105,7 @@ export const TinCustomTable = <RowData extends {}>({
   data,
   children,
   fullHeight = false,
-  maxContentHeight = '43rem',
+  maxContentHeight = '100%',
   onCheckboxChange,
   checkboxValue,
   checkboxIndeterminate,

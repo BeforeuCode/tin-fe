@@ -68,6 +68,7 @@ export const GamerDetails: FC = () => {
   const handleSubmit = (form: any) => {
     setLoading(true);
     return updateGamer(+id, form).then(() => {
+      history.push(`/home/gamers`);
       setLoading(false);
     });
   };

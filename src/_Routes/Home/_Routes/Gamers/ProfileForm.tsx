@@ -59,6 +59,21 @@ export const ProfileForm: FC<IProps> = ({ onSubmit, className, gamerData }) => {
     },
     validate: (form) => {
       const errors = requiredFieldsValidation(form);
+      if (form.name.length >= 200) {
+        errors.name = 'Name must be max 200 characters';
+      }
+      if (form.email.length >= 200) {
+        errors.email = 'Email must be max 200 characters';
+      }
+      if (form.nickname.length >= 200) {
+        errors.nickname = 'Nickname must be max 200 characters';
+      }
+      if (+form.age <= 1) {
+        errors.age = 'Age should not be less than 1';
+      }
+      if (+form.age >= 100) {
+        errors.age = 'Age should not be greater than 100';
+      }
       return errors;
     },
     validateOnMount: false,

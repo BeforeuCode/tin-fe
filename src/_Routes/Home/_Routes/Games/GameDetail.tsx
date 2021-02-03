@@ -6,7 +6,7 @@ import { createInvitesConfig } from './utils';
 import { GameForm } from './_Components/GameForm';
 import { TinCustomTable } from '../../../../_Components/TinCustomTable';
 import { NavigationContext } from '../../NavigationContext';
-import { getGameDetails } from './games-api';
+import { getGameDetails, updateGame } from './games-api';
 
 const Wrapper = styled.div<{
   isExpanded: boolean;
@@ -65,8 +65,12 @@ export const GameDetail: FC = () => {
     history.push(`/home/gamers/details/${id}`);
   };
 
-  const handleSubmit = () => {
-    console.log('submit');
+  const handleSubmit = (form: any) => {
+    setLoading(true);
+    updateGame(+id, form).then(() => {
+      history.push(`/home/games`);
+      setLoading(false);
+    });
   };
 
   const fetchGameDetails = () => {
